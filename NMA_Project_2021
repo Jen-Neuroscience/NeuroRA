@@ -1,0 +1,146 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "NMA_Project-Zz.ipynb",
+      "provenance": [],
+      "toc_visible": true,
+      "authorship_tag": "ABX9TyPFHiRXyVrQtdB6ansY24ZH",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Jen-Neuroscience/NeuroRA/blob/master/NMA_Project_2021\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "2pB0Cs6jeRRu"
+      },
+      "source": [
+        "# Project: Applying RSA to compare empirical data and computational model "
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ZwZ6BRyHkcxA"
+      },
+      "source": [
+        "# Project summary\n",
+        "# We appled RSA to compare fMRI and MEG data, MEG data and computational model , and ...."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "wEZw8K1Qihun"
+      },
+      "source": [
+        "#@title Imports\n",
+        "import glob\n",
+        "import numpy as np\n",
+        "import urllib\n",
+        "import torch\n",
+        "import cv2\n",
+        "import argparse\n",
+        "import time\n",
+        "import random\n",
+        "import matplotlib.pyplot as plt\n",
+        "import nibabel as nib\n",
+        "import pickle\n",
+        "from tqdm import tqdm\n",
+        "from PIL import Image\n",
+        "from torchvision import transforms as trn\n",
+        "import scipy.io as sio\n",
+        "import h5py\n",
+        "import os\n",
+        "from PIL import Image\n",
+        "from sklearn.preprocessing import StandardScaler\n",
+        "from torch.autograd import Variable as V\n",
+        "from sklearn.decomposition import PCA, IncrementalPCA\n",
+        "import torch.nn as nn\n",
+        "import torch.utils.model_zoo as model_zoo\n",
+        "\n",
+        "def loadmat(matfile):\n",
+        "    \"\"\"Function to load .mat files.\n",
+        "    Parameters\n",
+        "    ----------\n",
+        "    matfile : str\n",
+        "        path to `matfile` containing fMRI data for a given trial.\n",
+        "    Returns\n",
+        "    -------\n",
+        "    dict\n",
+        "        dictionary containing data in key 'vol' for a given trial.\n",
+        "    \"\"\"\n",
+        "    try:\n",
+        "        f = h5py.File(matfile)\n",
+        "    except (IOError, OSError):\n",
+        "        return sio.loadmat(matfile)\n",
+        "    else:\n",
+        "        return {name: np.transpose(f.get(name)) for name in f.keys()}"
+      ],
+      "execution_count": 7,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "pTGLckaxiZJm"
+      },
+      "source": [
+        "# Download fMRI and MEG data from Cichy et al. 2014"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "PNISWxbod77i"
+      },
+      "source": [
+        "#@title Data download\n",
+        "!wget -qO data.zip -c https://osf.io/7vpyh/download\n"
+      ],
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "KROwajiZfrAb"
+      },
+      "source": [
+        "#@title Data unzip\n",
+        "%%capture\n",
+        "!unzip -o data.zip #unzip the files"
+      ],
+      "execution_count": 5,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "KdSbOaSujrPE"
+      },
+      "source": [
+        ""
+      ]
+    }
+  ]
+}
